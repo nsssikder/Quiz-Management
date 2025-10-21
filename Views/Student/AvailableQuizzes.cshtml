@@ -1,0 +1,40 @@
+﻿@model List<OnlineQuizSystem.Models.Quiz>
+
+<h2 class="mb-4">Available Quizzes</h2>
+
+@if (Model.Any())
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Duration</th>
+                <th>Questions</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var quiz in Model)
+            {
+                <tr>
+                    <td>@quiz.Title</td>
+                    <td>@quiz.Description</td>
+                    <td>@quiz.Duration minutes</td>
+                    <td>@quiz.Questions.Count</td>
+                    <td>
+                        <a asp-controller="Quiz" asp-action="TakeQuiz" asp-route-id="@quiz.Id" class="btn btn-primary">Take Quiz</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <div class="alert alert-info">
+        No quizzes available at this time.
+    </div>
+}
+
+<a asp-action="Dashboard" class="btn btn-secondary">Back to Dashboard</a>

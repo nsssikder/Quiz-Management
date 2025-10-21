@@ -1,0 +1,53 @@
+﻿@model List<OnlineQuizSystem.Models.StudentAnswer>
+
+<h2 class="mb-4">My Results</h2>
+
+@if (Model.Any())
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Question ID</th>
+                <th>Selected Answer</th>
+                <th>Auto Score</th>
+                <th>Teacher Mark</th>
+                <th>Total Score</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var answer in Model)
+            {
+                <tr>
+                    <td>@answer.QuestionId</td>
+                    <td>@answer.SelectedOption</td>
+                    <td>@answer.MarksObtained</td>
+                    <td>@answer.TeacherMark</td>
+                    <td>@(answer.MarksObtained + answer.TeacherMark)</td>
+                    <td>
+                        @if (answer.IsMarked)
+                        {
+                            <span class="badge bg-success">Marked</span>
+                        }
+                        else
+                        {
+                            <span class="badge bg-warning">Pending Review</span>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <div class="alert alert-info">
+        Total Score: @Model.Sum(a => a.MarksObtained + a.TeacherMark)
+    </div>
+}
+else
+{
+    <div class="alert alert-info">
+        You haven't taken any quizzes yet.
+    </div>
+}
+
+<a asp-action="Dashboard" class="btn btn-secondary">Back to Dashboard</a>

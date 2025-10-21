@@ -1,0 +1,45 @@
+﻿@model List<OnlineQuizSystem.Models.Question>
+
+<h2 class="mb-4">My Questions</h2>
+
+@if (Model.Any())
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Question</th>
+                <th>Options</th>
+                <th>Correct Answer</th>
+                <th>Marks</th>
+                <th>Created At</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var question in Model)
+            {
+                <tr>
+                    <td>@question.QuestionText</td>
+                    <td>
+                        <ol>
+                            <li>@question.Option1</li>
+                            <li>@question.Option2</li>
+                            <li>@question.Option3</li>
+                            <li>@question.Option4</li>
+                        </ol>
+                    </td>
+                    <td>Option @question.CorrectAnswer</td>
+                    <td>@question.Marks</td>
+                    <td>@question.CreatedAt.ToString("g")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <div class="alert alert-info">
+        You haven't created any questions yet. <a asp-action="CreateQuestion">Create your first question</a>.
+    </div>
+}
+
+<a asp-action="Dashboard" class="btn btn-secondary">Back to Dashboard</a>

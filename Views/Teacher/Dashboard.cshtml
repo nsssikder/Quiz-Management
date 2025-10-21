@@ -1,0 +1,42 @@
+﻿@{
+    ViewData["Title"] = "Teacher Dashboard";
+}
+
+<h2 class="mb-4">Teacher Dashboard</h2>
+
+<div class="row">
+    <div class="col-md-4 mb-4">
+        <div class="card dashboard-card">
+            <div class="card-body text-center">
+                <h5 class="card-title">Create Question</h5>
+                <p class="card-text">Add new questions to the question bank</p>
+                <a asp-action="CreateQuestion" class="btn btn-primary">Create Question</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4 mb-4">
+        <div class="card dashboard-card">
+            <div class="card-body text-center">
+                <h5 class="card-title">View Questions</h5>
+                <p class="card-text">Manage your existing questions</p>
+                <a asp-action="Questions" class="btn btn-primary">View Questions</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4 mb-4">
+        <div class="card dashboard-card">
+            <div class="card-body text-center">
+                <h5 class="card-title">Mark Answers</h5>
+                <p class="card-text">Review and mark student answers</p>
+                <a asp-action="MarkAnswers" class="btn btn-primary">Mark Answers</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+@if (TempData["Message"] != null)
+{
+    <div class="alert alert-success mt-3">@TempData["Message"]</div>
+}

@@ -1,0 +1,55 @@
+﻿@model List<OnlineQuizSystem.Models.StudentAnswer>
+
+<h2 class="mb-4">Mark Student Answers</h2>
+
+@if (Model.Any())
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Student ID</th>
+                <th>Question ID</th>
+                <th>Selected Option</th>
+                <th>Auto Score</th>
+                <th>Teacher Mark</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var answer in Model)
+            {
+                <tr>
+                    <td>@answer.StudentId</td>
+                    <td>@answer.QuestionId</td>
+                    <td>@answer.SelectedOption</td>
+                    <td>@answer.MarksObtained</td>
+                    <td>
+                        <form asp-action="UpdateMarks" method="post">
+                            <input type="hidden" name="answerId" value="@answer.Id" />
+                            <input type="number" name="marks" value="@answer.TeacherMark" min="0" max="10" class="form-control" />
+                            <button type="submit" class="btn btn-sm btn-primary mt-1">Save</button>
+                        </form>
+                    </td>
+                    <td>
+                        @if (answer.IsMarked)
+                        {
+                            <span class="badge bg-success">Marked</span>
+                        }
+                        else
+                        {
+                            <span class="badge bg-warning">Pending</span>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <div class="alert alert-info">
+        No answers to mark at this time.
+    </div>
+}
+
+<a asp-action="Dashboard" class="btn btn-secondary">Back to Dashboard</a>

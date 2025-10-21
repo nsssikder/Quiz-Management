@@ -1,0 +1,62 @@
+﻿@model List<OnlineQuizSystem.Models.Question>
+
+<h2>Create Quiz</h2>
+
+<form asp-action="CreateQuiz" method="post">
+    <div class="form-group">
+        <label for="title" class="control-label">Quiz Title</label>
+        <input type="text" id="title" name="title" class="form-control" required />
+    </div>
+
+    <div class="form-group">
+        <label for="description" class="control-label">Description</label>
+        <textarea id="description" name="description" class="form-control" rows="3"></textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="duration" class="control-label">Duration (minutes)</label>
+        <input type="number" id="duration" name="duration" class="form-control" min="1" max="120" value="10" required />
+    </div>
+
+    <h4>Select Questions</h4>
+
+    @if (Model.Any())
+    {
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Select</th>
+                    <th>Question</th>
+                    <th>Marks</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (int i = 0; i < Model.Count; i++)
+                {
+                    <tr>
+                        <td>
+                            <input type="checkbox" name="selectedQuestions" value="@Model[i].Id" />
+                        </td>
+                        <td>@Model[i].QuestionText</td>
+                        <td>@Model[i].Marks</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        <button type="submit" class="btn btn-primary">Create Quiz</button>
+    }
+    else
+    {
+        <div class="alert alert-warning">
+            You haven't created any questions yet. <a asp-action="CreateQuestion">Create some questions first</a>.
+        </div>
+    }
+</form>
+
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger mt-3">@TempData["Error"]</div>
+}
+
+<a asp-action="Dashboard" class="btn btn-secondary mt-3">Back to Dashboard</a>

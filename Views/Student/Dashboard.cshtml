@@ -1,0 +1,27 @@
+﻿@{
+    ViewData["Title"] = "Student Dashboard";
+}
+
+<h2 class="mb-4">Student Dashboard</h2>
+
+<div class="row">
+    <div class="col-md-6 mb-4">
+        <div class="card dashboard-card">
+            <div class="card-body text-center">
+                <h5 class="card-title">Available Quizzes</h5>
+                <p class="card-text">Take available quizzes</p>
+                <a asp-action="AvailableQuizzes" class="btn btn-primary">View Quizzes</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6 mb-4">
+        <div class="card dashboard-card">
+            <div class="card-body text-center">
+                <h5 class="card-title">My Results</h5>
+                <p class="card-text">View your quiz results</p>
+                <a asp-action="Results" class="btn btn-primary">View Results</a>
+            </div>
+        </div>
+    </div>
+</div>

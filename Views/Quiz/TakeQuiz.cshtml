@@ -1,0 +1,71 @@
+﻿@model OnlineQuizSystem.Models.Quiz
+
+<h2>@Model.Title</h2>
+<p>@Model.Description</p>
+<p>Time remaining: <span id="timer">@(Model.Duration):00</span></p>
+
+<form asp-action="SubmitQuiz" id="quizForm">
+    <input type="hidden" name="quizId" value="@Model.Id" />
+
+    @for (int i = 0; i < Model.Questions.Count; i++)
+    {
+        <div class="question mb-4">
+            <h4>@(i + 1). @Model.Questions[i].QuestionText</h4>
+            <input type="hidden" name="[@i].QuestionId" value="@Model.Questions[i].Id" />
+
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="[@i].SelectedOption" id="q@(i)_1" value="1" required>
+                <label class="form-check-label" for="q@(i)_1">@Model.Questions[i].Option1</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="[@i].SelectedOption" id="q@(i)_2" value="2">
+                <label class="form-check-label" for="q@(i)_2">@Model.Questions[i].Option2</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="[@i].SelectedOption" id="q@(i)_3" value="3">
+                <label class="form-check-label" for="q@(i)_3">@Model.Questions[i].Option3</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="[@i].SelectedOption" id="q@(i)_4" value="4">
+                <label class="form-check-label" for="q@(i)_4">@Model.Questions[i].Option4</label>
+            </div>
+        </div>
+        <hr>
+    }
+
+    <button type="submit" class="btn btn-primary">Submit Quiz</button>
+</form>
+
+@section Scripts {
+    <script>
+        // Timer functionality
+        var duration = @Model.Duration;
+        var timeLeft = duration * 60;
+
+        function updateTimer() {
+            timeLeft--;
+
+            var minutes = Math.floor(timeLeft / 60);
+            var seconds = timeLeft % 60;
+
+            document.getElementById('timer').textContent =
+                minutes.toString().padStart(2, '0') + ':' + seconds.toString().padStart(2, '0');
+
+            if (timeLeft <= 0) {
+                clearInterval(timerInterval);
+                document.getElementById('quizForm').submit();
+            }
+        }
+
+        // Start the timer
+        var timerInterval = setInterval(updateTimer, 1000);
+
+        // Prevent form submission if time is up
+        document.getElementById('quizForm').addEventListener('submit', function(e) {
+            if (timeLeft <= 0) {
+                e.preventDefault();
+                alert('Time is up! Your quiz has been automatically submitted.');
+            }
+        });
+    </script>
+}

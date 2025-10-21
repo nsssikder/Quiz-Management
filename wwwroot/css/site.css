@@ -1,0 +1,72 @@
+.quiz-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.question-card {
+    background-color: white;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.timer-display {
+    font-size: 24px;
+    font-weight: bold;
+    color: #dc3545;
+    text-align: center;
+    margin: 20px 0;
+}
+
+.option-label {
+    display: block;
+    padding: 10px 15px;
+    margin: 5px 0;
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+    .option-label:hover {
+        background-color: #e9ecef;
+    }
+
+.option-input:checked + .option-label {
+    background-color: #007bff;
+    color: white;
+    border-color: #007bff;
+}
+
+.navbar-brand {
+    font-weight: bold;
+}
+
+.dashboard-card {
+    background-color: white;
+    border-radius: 8px;
+    padding: 25px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: transform 0.3s;
+}
+
+    .dashboard-card:hover {
+        transform: translateY(-5px);
+    }
+
+    .dashboard-card h3 {
+        color: #495057;
+    }
+
+    .dashboard-card a {
+        text-decoration: none;
+        color: inherit;
+    }
